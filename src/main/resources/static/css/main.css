@@ -1,0 +1,270 @@
+body {
+    overflow-x: hidden;
+}
+
+#sidebar-wrapper {
+    min-height: 100vh;
+    margin-left: -15rem;
+    -webkit-transition: margin .25s ease-out;
+    -moz-transition: margin .25s ease-out;
+    -o-transition: margin .25s ease-out;
+    transition: margin .25s ease-out;
+}
+
+#sidebar-wrapper .sidebar-heading {
+    padding: 0.875rem 1.25rem;
+    font-size: 1.2rem;
+}
+
+#sidebar-wrapper .list-group {
+    width: 15rem;
+}
+
+#page-content-wrapper {
+    min-width: 100vw;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    margin-left: 0;
+}
+
+@media (min-width: 768px) {
+    #sidebar-wrapper {
+        margin-left: 0;
+    }
+
+    #page-content-wrapper {
+        min-width: 0;
+        width: 100%;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        margin-left: -15rem;
+    }
+}
+
+.bg-light {
+    background-color: #1fe0c559 !important;
+}
+
+.btn-primary {
+    color: #004085; !important;
+    background-color: #1fe0c559;
+    border-color: #17a2b8;
+    margin-bottom: 0.5%;
+}
+
+.btn-primary:hover {
+    background-color: #dae0e5!important;
+}
+
+.font-class{
+    font-family: Brush Script MT, Brush Script Std, cursive;
+}
+
+.category-tree {
+    margin-top: 2%;
+    margin-right: 2%;
+}
+
+.scrollable-content{
+    overflow-y: auto;
+    max-height: 80vh;
+}
+
+.scrollable-content-error{
+    overflow-y: auto;
+    max-height: 70vh;
+}
+
+.home-image{
+    width: auto;
+    height: 93vh;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.add-category-btn{
+    margin-left: 2.35%;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+}
+
+.row {
+    margin-top: 15px !important;
+}
+
+.add-category-field{
+    width: 88%;
+}
+
+.add-ctgr-footer{
+    margin-right: 2.5%;
+    margin-top: 2.5%;
+}
+
+.add-ctgr-form{
+    margin-top: 2.5%;
+}
+
+.error-msg{
+    color: red;
+    font-size: 14px;
+}
+
+.error-hidden{
+    visibility: hidden;
+}
+
+.error-border{
+    border-color: red;
+}
+
+.add-product-btn {
+    margin-top: 2%;
+    margin-bottom: 1.5%;
+    margin-right: 5%;
+}
+
+.product-table{
+    width: 98%!important;
+    margin-left: 1%;
+    margin-right: 10%;
+    margin-top: 2px;
+}
+
+.product-filter-dropdown{
+    width: 25%;
+}
+
+.product-filter-item{
+    margin-left: 2%;
+}
+
+.product-table-header{
+    background-color: rgba(0,0,0,.125);
+}
+
+.product-img{
+    width: 140px;
+    height: 110px;
+}
+
+#productsTableHead{
+    margin-bottom: 0 !important;
+}
+
+.product-container{
+    margin-left: 5%;
+}
+
+.flex-row {
+    display: flex;
+    flex-wrap: wrap;
+}
+.flex-row > [class*='col-'] {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-row .thumbnail,
+.flex-row .caption {
+    flex-direction: column;
+    display: flex;
+    flex: 1 0 auto;
+    height: auto;
+    position: relative;
+}
+.flex-text {
+    flex-grow: 1;
+}
+.flex-row img {
+    min-width: 0;
+    width: 75%;
+}
+
+@media only screen and (max-width : 480px){
+    .flex-row > [class*='col-'] {
+        width: 100%;
+    }
+    .flex-row  {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
+
+.container{
+    max-width: 98% !important;
+}
+
+.catalogue-img{
+    padding: 10% 10% 10% 10%;
+}
+
+.catalogue-filter{
+    margin-left: 5%;
+    margin-top: 2%;
+}
+
+.portfolio{
+    padding:6%;
+    text-align:center;
+}
+.heading{
+    background: #fff;
+    padding: 1%;
+    text-align: left;
+    box-shadow: 0px 0px 4px 0px #545b62;
+}
+.heading img{
+    width: 10%;
+}
+.bio-info{
+    padding: 2%;
+    background:#fff;
+    box-shadow: 0px 0px 4px 0px #b0b3b7;
+}
+.name{
+    font-family: 'Charmonman', cursive;
+    font-weight:600;
+}
+.bio-image{
+    text-align:center;
+}
+.bio-image img{
+    width: 60%;
+    height: auto;
+    border-radius:50%;
+}
+.bio-content{
+    text-align:left;
+}
+.bio-content p{
+    font-weight:600;
+    font-size:30px;
+}
+
+#totalPrice{
+    margin-right: 2%;
+    margin-top: 1%;
+ }
+
+#basketForm{
+    margin-top: 0.5%;
+}
+
+#itemCount {
+    position: fixed;
+    border-radius: 50%;
+    background: #17a2b8;
+    color: white;
+    text-align: center;
+    padding: 0px 7px 0px 7px;
+    top: 0.75%;
+    margin-left: -0.25%;
+}
+
+.userLogOrRegForm{
+    padding: 2% 35% 0% 35%;
+}

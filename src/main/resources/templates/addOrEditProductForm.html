@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div class="font-class add-ctgr-form" th:fragment="addOrEditProductForm">
+    <form id="newCategoryForm" action="#" data-th-action="@{/saveProduct}"
+          data-th-object="${editableProduct}" method="post" enctype="multipart/form-data">
+        <div>
+            <div class="product-container">
+                <div class="row">
+                    <div class="col-sm">
+                        Category:
+                    </div>
+                    <div class="col-lg product-field">
+                        <select id="categoryFilter" onchange="clearProductErrorMsg(this);"
+                                class="selectpicker add-category-field" th:field="*{categoryId}">
+                            <option th:value="null"
+                                    th:text="-none-"></option>
+                            <option th:each="category: ${categories}"
+                                    th:value="${category.categoryId}"
+                                    th:selected="${category.categoryId == editableProduct.categoryId}">
+                                <span th:if="${category.parentCategory} == null" th:text="${category.name}"></span>
+                                <span th:if="${category.parentCategory} != null" th:text="${'&nbsp;&nbsp;-' + category.name}"></span>
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-sm error-msg error-hidden">
+                        Category should be selected!
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm">
+                        Name:
+                    </div>
+                    <div class="col-lg product-field">
+                        <input id="productName" class="add-category-field" type="text" name="Product name"
+                               th:field="*{name}" th:maxlength="256" onkeyup="clearProductErrorMsg(this);"/>
+                        <input type="hidden" th:field="*{productId}">
+                    </div>
+                    <div class="col-sm error-msg error-hidden">
+                        Name should be not empty!
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm">
+                        Price:
+                    </div>
+                    <div class="col-lg product-field">
+                        <input id="productPrice" class="add-category-field" type="text" name="Product price"
+                               th:field="*{price}" th:maxlength="256" onkeyup="clearProductErrorMsg(this);"/>
+                    </div>
+                    <div class="col-sm error-msg error-hidden">
+                        Price should not be empty!
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm">
+                        Available/On Order:
+                    </div>
+                    <div class="col-lg product-field">
+                        <select id="status" class="selectpicker add-category-field"
+                                th:field="*{available}">
+                            <option th:value="true"
+                                    th:text="'Available'"></option>
+                            <option th:value="false"
+                                    th:text="'On Order'"></option>
+                        </select>
+                    </div>
+                    <div class="col-sm"></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm">
+                        Photo:
+                    </div>
+                    <div class="col-lg" th:if="${editableProduct.photoPath != null}">
+                        <img class="product-img" th:src="${editableProduct.photoPath}" th:if="${editableProduct.photoPath != null}"/>
+                        <input id="changePhotoBtn" type="file" name="file" onclick="clearProductErrorMsg(this);"/>
+                        <input type="hidden" th:field="*{photoPath}">
+                    </div>
+                    <div class="col-lg product-field" th:if="${editableProduct.photoPath == null}">
+                        <input id="addPhotoBtn" type="file" name="file" onclick="clearProductErrorMsg(this);"/>
+                        <input type="hidden" th:field="*{photoPath}">
+                    </div>
+                    <div class="col-sm error-msg error-hidden">
+                        Photo should be uploaded!
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm">
+                        Description:
+                    </div>
+                    <div class="col-lg product-field">
+                        <textarea rows="4" id="productDescription" class="add-category-field" type="text"
+                                  name="Product description" th:field="*{description}" th:maxlength="1024" onkeyup="clearProductErrorMsg(this);"/>
+                    </div>
+                    <div class="col-sm error-msg error-hidden">
+                        Description should be not empty!
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="text-right add-ctgr-footer">
+            <button id="saveProduct" type="submit" class="btn btn-primary add-category-btn">Save</button>
+            <a th:href="@{/manageProducts}">
+                <button type="button" class="btn btn-primary add-category-btn">Close</button>
+            </a>
+        </div>
+
+    </form>
+</div>
+</html>

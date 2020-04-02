@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div class="font-class add-ctgr-form" th:fragment="addOrEditCategoryForm">
+    <form id="newCategoryForm" action="#" data-th-action="@{/saveCategory}"
+          data-th-object="${editableCategory}" method="post">
+        <div class="text-center" style="width: 70%;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm">
+                        Parent Category:
+                    </div>
+                    <div class="col-sm">
+                        <select class="add-category-field" id="parentCategory" th:field="*{parentCategoryId}" th:disabled="${parentNonEditable}">
+                            <option th:value="null"
+                                    th:text="-none-"></option>
+                            <option th:each="root: ${rootCategories}"
+                                    th:value="${root.categoryId}"
+                                    th:text="${root.name}"
+                                    th:selected="${root.categoryId == editableCategory.parentCategoryId}"
+                            th:if="${root.categoryId != editableCategory.categoryId}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm">
+                        Category Name:
+                    </div>
+                    <div class="col-sm">
+                        <input id="categoryName" class="add-category-field" type="text" name="Category name"
+                               th:field="*{name}" th:maxlength="256" onkeyup="clearErrorMsg();"/>
+                        <input type="hidden" th:field="*{categoryId}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm">&nbsp;</div>
+                    <div class="col-sm">
+                        <span id="nameEmptyError" class="error-msg"></span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="text-right add-ctgr-footer">
+            <button id="saveCategory" type="submit" class="btn btn-primary add-category-btn">Save</button>
+            <a th:href="@{/categoryTree}">
+                <button type="button" class="btn btn-primary add-category-btn">Close</button>
+            </a>
+        </div>
+    </form>
+</div>
+</html>

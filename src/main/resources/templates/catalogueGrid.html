@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div class="form-inline catalogue-filter" style="width: 75%">
+    <label class="product-filter-item">Category:</label>
+    <select id="categoryFilter" onchange="filterProducts('CATALOGUE')"
+            class="selectpicker product-filter-item">
+        <option th:value="null"
+                th:text="-none-"></option>
+        <option th:each="category: ${categories}"
+                th:value="${category.categoryId}">
+            <span th:if="${category.parentCategory} == null" th:text="${category.name}"></span>
+            <span th:if="${category.parentCategory} != null" th:text="${'&nbsp;&nbsp;-' + category.name}"></span>
+        </option>
+    </select>
+</div>
+
+<div class="container scrollable-content">
+    <div id="catalogueGrid" class="flex-row row">
+        <div class="col-xs-6 col-sm-4 col-lg-3 text-center" th:each="product: ${products}">
+            <div class="thumbnail">
+                <div class="caption">
+                    <div style="height: 75%;">
+                        <img class="catalogue-img" th:src="${product.photoPath}">
+                    </div>
+                    <h4 th:text="${product.name}"/>
+                    <span class="flex-text text-muted"
+                          th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')}"/></span>
+                    <p class="flex-text text-muted" th:text="${product.available} ? 'Available' : 'On Order'"/>
+                    <p><a class="btn btn-primary" th:href="'/getProductDetails/' + ${product.productId}">Details</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</html>

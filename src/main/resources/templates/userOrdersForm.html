@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div class="scrollable-content" th:fragment="userOrdersForm">
+    <h2 class="font-class text-center">My Orders</h2>
+    <div th:each="userOrder : ${userOrders}">
+        <div class="font-class" style="margin-left: 1%;">
+            <span th:text="'Order ID: ' + ${userOrder.sweetOrderId}"/>
+            <span th:text="'Created date: ' + ${#dates.format(userOrder.createdDate, 'dd-MM-yyyy')}"/>
+        </div>
+        <table id="productsTableHead" class="table font-class product-table fixed_headers category-tree-content">
+            <thead class="product-table-header">
+            <tr class="text-center">
+                <th scope="col" width="15%">Name</th>
+                <th scope="col" width="20%">Photo</th>
+                <th scope="col" width="15%">Price</th>
+                <th scope="col" width="30%">Description</th>
+                <th scope="col" width="10%">Amount</th>
+            </tr>
+            </thead>
+            <tbody id="productsTblBody">
+            <tr th:each="productItem : ${userOrder.groupedProducts}">
+                <th scope="row" class="text-center" width="15%"><span th:text="${productItem.key.name}"/></th>
+                <td class="text-center" width="20%"><img class="product-img" th:src="${productItem.key.photoPath}"
+                                                         alt="No photo ¯\_(ツ)_/¯"/></td>
+                <td class="text-center" width="15%"><span
+                        th:text="${#numbers.formatDecimal(productItem.key.price, 0, 'COMMA', 2, 'POINT')}"/></td>
+                <td class="text-center" width="30%"><span th:text="${productItem.key.description}"/></td>
+                <td class="text-center" width="10%"><span th:text="${productItem.value}"/></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</html>

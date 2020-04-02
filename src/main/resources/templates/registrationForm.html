@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div class="container" th:fragment="registrationForm">
+    <form id="registrationForm" class="form-signin text-center font-class userLogOrRegForm" action="#"
+          data-th-action="@{/registration}" th:object="${user}" method="POST">
+        <h2 class="form-signin-heading">Account Creation</h2>
+        <div class="alert alert-danger" th:each="error : ${errors}" th:text="${@environment.getProperty(error.code)}"/>
+        <label for="inputUsername" class="sr-only">Username</label>
+        <input type="text" id="inputUsername" class="form-control" placeholder="Username"
+               autofocus="true" th:field="*{username}"/>
+        <br/>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password"
+               th:field="*{password}"/>
+        <br/>
+        <label for="confirmPassword" class="sr-only">Confirmatin Password</label>
+        <input type="password" id="confirmPassword" class="form-control" placeholder="Password"
+               th:field="*{passwordConfirm}"/>
+        <br/>
+        <div class="text-center">
+            <button class="btn btn-primary btn-block" type="submit">Create an Account</button>
+        </div>
+    </form>
+</div>
+</html>

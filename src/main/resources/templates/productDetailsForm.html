@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div class="container portfolio font-class" th:fragment="productDetailsForm">
+    <form id="productToBasket" action="#" th:action="@{/basket/addToBasket}" th:object="${product}" method="post">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="heading">
+                <img src="/img/details_logo.jpg"/>
+            </div>
+        </div>
+    </div>
+    <div class="bio-info">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="bio-image">
+                            <img th:src="${product.photoPath}" alt="No photo ¯\_(ツ)_/¯"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="bio-content">
+                    <h3 th:text="'Hi, my name is \'' + ${product.name} + '\''"/>
+                    <br/>
+                    <h6 th:text="'My price is ' + ${#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')}"/>
+                    <h6 style="color: #004085;" th:if="${product.available}">Luckily, I'm available &#9786;</h6>
+                    <h6 style="color: red;" th:if="${not product.available}">Unfortunately, I'm available only on order
+                        &#9785;</h6>
+                    <br/>
+                    <h3 th:text="'A little bit about me: ' + ${product.description}"/>
+                </div>
+                <div id="hiddenMapping">
+                    <input type="hidden" th:field="*{productId}"/>
+                    <input type="hidden" th:field="*{name}"/>
+                    <input type="hidden" th:field="*{price}"/>
+                    <input type="hidden" th:field="*{description}"/>
+                    <input type="hidden" th:field="*{photoPath}"/>
+                    <input type="hidden" th:field="*{available}"/>
+                    <input type="hidden" th:field="*{category}"/>
+                </div>
+            </div>
+        </div>
+        <div class="text-right">
+            <button class="btn btn-primary add-category-btn" type="submit">Buy</button>
+            <a th:href="@{/catalogue}">
+                <button type="button" class="btn btn-primary add-category-btn">Close</button>
+            </a>
+        </div>
+    </div>
+    </form>
+</div>
+</html>

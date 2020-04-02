@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="~{commonHead}"/>
+<body>
+
+<div class="d-flex" id="wrapper">
+    <div th:include="~{menuBar}"/>
+    <div id="page-content-wrapper">
+        <div th:include="~{navigation}"/>
+        <div class="font-class" th:include="~{catalogueGrid}"/>
+    </div>
+
+</div>
+</body>
+</html>

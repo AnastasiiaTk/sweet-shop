@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<form th:action="@{/login}" method="post" class="form-signin text-center font-class userLogOrRegForm"
+      th:fragment="loginForm">
+    <fieldset>
+        <h1>Please Sign In</h1>
+        <div th:if="${param.error}">
+            <div class="alert alert-danger">
+                Invalid username and password.
+            </div>
+        </div>
+        <div th:if="${param.logout}">
+            <div class="alert alert-info">
+                You have been logged out.
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="text" name="username" id="username" class="form-control input-lg"
+                   placeholder="UserName" required="true" autofocus="true" max="256"/>
+        </div>
+        <div class="form-group">
+            <input type="password" name="password" id="password" class="form-control input-lg"
+                   placeholder="Password" required="true"/>
+        </div>
+        <div class="text-center">
+            <button class="btn btn-primary btn-block" type="submit">Log in</button>
+            <a th:href="@{/registration}" style="text-decoration: none;">
+                <button class="btn btn-primary btn-block" type="button">Create an Account</button>
+            </a>
+        </div>
+    </fieldset>
+</form>
+
+
+</html>

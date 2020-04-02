@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<div id="basketForm" th:if="not ${selectedProductsMap == null or selectedProductsMap.isEmpty()}">
+    <table id="productsTableHead" class="table font-class product-table fixed_headers category-tree-content"
+           th:fragment="basketForm">
+        <thead class="product-table-header">
+        <tr class="text-center">
+            <th scope="col" width="25%">Category</th>
+            <th scope="col" width="25%">Name</th>
+            <th scope="col" width="15%">Price</th>
+            <th scope="col" width="15%">Count</th>
+            <th scope="col" width="20%">Action</th>
+        </tr>
+        </thead>
+    </table>
+    <div class="scrollable-content">
+        <table id="basketTable" class="table font-class product-table fixed_headers category-tree-content">
+            <tbody id="basketTblBody">
+            <tr th:each="selectedItem : ${selectedProductsMap}">
+                <td scope="row" class="text-center" width="25%"><span th:text="${selectedItem.key.category.name}"/></td>
+                <td scope="row" class="text-center" width="25%"><span th:text="${selectedItem.key.name}"/></td>
+                <td class="text-center" width="15%"><span
+                        th:text="${#numbers.formatDecimal(selectedItem.key.price, 0, 'COMMA', 2, 'POINT')}"/></td>
+                <td scope="row" class="text-center" width="15%"><input type="number" min="1" max="100"
+                                                                       th:value="${selectedItem.value}"
+                                                                       th:onchange="|changeProductAmount('${selectedItem.key.productId}', this)|"/>
+                </td>
+                <td class="text-center" width="20%">
+                    <button class="btn btn-primary btn-xs" type="button"
+                            th:onclick="|deleteProductFromBasket('${selectedItem.key.productId}', this)|">Delete
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-right font-class">
+        <span>Total price:&nbsp;</span>
+        <span id="totalPrice"
+              th:text="${#numbers.formatDecimal(totalPrice, 1, 'COMMA', 2, 'POINT')}"/>
+        <a href="/saveOrder">
+            <button id="createOrder" class="btn btn-primary btn-xs" type="submit">Create Order</button>
+        </a>
+        <a href="/catalogue">
+            <button id="closeBasket" class="btn btn-primary btn-xs" type="button">Close</button>
+        </a>
+        <span>&nbsp;</span>
+    </div>
+</div>
+<div id="emptyBasket" th:if="${selectedProductsMap == null or selectedProductsMap.isEmpty()}">
+    <div class="text-center m-auto">
+        <h3 style="color: red;">O_ops! The basket is still empty &#9785;</h3>
+        <img src="/img/empty_result.jpg">
+    </div>
+</div>
+</html>

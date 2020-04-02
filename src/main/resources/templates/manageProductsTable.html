@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="manageProductsTable">
+    <div class="alert alert-danger font-class" th:if="${errorMsg}" th:text="${errorMsg}"/>
+    <form class="form-inline font-class">
+        <div class="form-inline" style="width: 75%">
+            <label class="product-filter-item">Category:</label>
+            <select id="categoryFilter" onchange="filterProducts('MANAGING_PRODUCTS')"
+                    class="selectpicker product-filter-item">
+                <option th:value="null"
+                        th:text="-none-"></option>
+                <option th:each="category: ${categories}"
+                        th:value="${category.categoryId}">
+                    <span th:if="${category.parentCategory} == null" th:text="${category.name}"></span>
+                    <span th:if="${category.parentCategory} != null"
+                          th:text="${'&nbsp;&nbsp;-' + category.name}"></span>
+                </option>
+            </select>
+        </div>
+        <div class="text-right" style="width: 25%">
+            <a th:href="@{/addProductForm}">
+                <button id="addProductBtn" class="btn btn-primary add-product-btn font-class text-right" type="button">
+                    Add Product
+                </button>
+            </a>
+        </div>
+    </form>
+
+    <table id="productsTableHead" class="table font-class product-table fixed_headers category-tree-content">
+        <thead class="product-table-header">
+        <tr class="text-center">
+            <th scope="col" width="15%">Name</th>
+            <th scope="col" width="20%">Photo</th>
+            <th scope="col" width="10%">Price</th>
+            <th scope="col" width="30%">Description</th>
+            <th scope="col" width="15%">Available/On Order</th>
+            <th scope="col" width="20%">Action</th>
+        </tr>
+        </thead>
+    </table>
+    <div th:class="${errorMsg} ? 'scrollable-content-error' : 'scrollable-content'">
+        <table id="productsTable" class="table font-class product-table fixed_headers category-tree-content">
+            <tbody id="productsTblBody">
+            <tr th:each="product : ${products}">
+                <th scope="row" class="text-center" width="15%"><span th:text="${product.name}"/></th>
+                <td class="text-center" width="20%"><img class="product-img" th:src="${product.photoPath}"
+                                                         alt="No photo ¯\_(ツ)_/¯"/></td>
+                <td class="text-center" width="10%"><span
+                        th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')}"/></td>
+                <td width="30%"><span th:text="${product.description}"/></td>
+                <td class="text-center" width="15%"><span th:text="${product.available} ? 'Available' : 'On Order'"/>
+                </td>
+                <td class="text-center" width="20%">
+                    <input type="hidden" th:value="${product.productId}">
+                    <a th:href="'editProductForm/' + ${product.productId}">
+                        <button class="btn btn-primary btn-xs" type="button">Edit</button>
+                    </a>
+                    <button class="deleteProduct btn btn-primary btn-xs" type="button" data-toggle="modal"
+                            data-target="#confirmationModal">Delete
+                    </button>
+                    <div class="modal fade font-class" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="categoryModalLabel"
+                         aria-hidden="true">
+                        <form action="#" method="post" data-th-action="@{/deleteProduct}" data-th-object="${selectedProduct}">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="categoryModalLabel">Delete product</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Are you sure?
+                                        <input id="selectedProductId" type="hidden" th:field="*{productId}">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</html>

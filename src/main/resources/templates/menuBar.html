@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div class="bg-light border-right font-class" id="sidebar-wrapper" th:fragment="menuBar">
+    <div class="sidebar-heading">Sweeeeeeet Shooooop</div>
+    <div class="list-group list-group-flush">
+        <div sec:authorize="hasAnyRole('ROLE_ADMIN')">
+            <a th:href="@{/categoryTree}" class="list-group-item list-group-item-action bg-light">Category Tree</a>
+            <a th:href="@{/manageProducts}" class="list-group-item list-group-item-action bg-light">Manage Products</a>
+        </div>
+        <a th:href="@{/catalogue}" class="list-group-item list-group-item-action bg-light">Catalogue</a>
+        <a th:href="@{/orders/open}" sec:authorize="isAuthenticated()" class="list-group-item list-group-item-action bg-light">My Orders</a>
+        <a th:href="@{/home}" class="list-group-item list-group-item-action bg-light">Discounts</a>
+        <a th:href="@{/home}" class="list-group-item list-group-item-action bg-light">Delivery and Payment</a>
+        <a th:href="@{/home}" class="list-group-item list-group-item-action bg-light">About Us</a>
+    </div>
+</div>
+
+</html>
